@@ -22,72 +22,89 @@ class _UserInputState extends State<UserInput> {
       body: Column(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.all(10),
-            height: (MediaQuery.of(context).size.height - 20) * 0.25,
+            margin: EdgeInsets.only(top: 10, left: 5, right: 5),
+            height: (MediaQuery.of(context).size.height - 20) * 0.12,
             width: MediaQuery.of(context).size.width,
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    widget.display,
-                    style: TextStyle(color: Colors.black, fontSize: 50),
-                    textAlign: TextAlign.right,
-                  ),
-                  Text(
-                    widget.result,
-                    style: TextStyle(color: Colors.black, fontSize: 50),
-                    textAlign: TextAlign.right,
-                  ),
-                ],
-              ),
+            child: ListView(
+              reverse: true,
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                Text(
+                  widget.display,
+                  style: TextStyle(color: Colors.black, fontSize: 50),
+                ),
+              ],
             ),
             decoration: BoxDecoration(
               color: Color.fromARGB(50, 121, 156, 110),
-              borderRadius: BorderRadius.all(
-                Radius.circular(5),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(5),
+                topRight: Radius.circular(5),
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 10, left: 5, right: 5),
+            height: (MediaQuery.of(context).size.height - 20) * 0.12,
+            width: MediaQuery.of(context).size.width,
+            child: ListView(
+              reverse: true,
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                Text(
+                  widget.result,
+                  style: TextStyle(color: Colors.black, fontSize: 50),
+                ),
+              ],
+            ),
+            decoration: BoxDecoration(
+              color: Color.fromARGB(50, 121, 156, 110),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(5),
+                bottomRight: Radius.circular(5),
               ),
             ),
           ),
           SizedBox(
-            height: (MediaQuery.of(context).size.height) * 0.05,
+            height: (MediaQuery.of(context).size.height) * 0.06,
           ),
           Container(
             height: (MediaQuery.of(context).size.height - 15) * 0.55,
             color: Colors.black,
-            child: Keypad(_updateInput, _updateResult),
+            child: Keypad(_updateInput, _updateResult, _deleteInput),
           ),
         ],
       ),
     );
   }
 
-  void _updateInput(bool add, [String input = '']) {
-    if (add) {
-      _addChar(input);
-    } else {
-      _removeChar();
-    }
+  void _updateInput(String input) {
+    setState(() {
+      widget.display = widget.calculator.getInput(widget.display + input);
+      String res = widget.calculator.getResult(widget.display);
+      if (res != '') widget.result = res;
+    });
   }
 
   void _updateResult() {
     setState(() {
-      widget.result = widget.calculator.getResult(widget.display);
+      if (widget.calculator.strErr != '') {
+        widget.result = widget.calculator.strErr;
+      } else {
+        widget.display = widget.calculator.getResult(widget.display);
+        widget.result = '';
+      }
     });
   }
 
-  void _addChar(String input) {
-    setState(() {
-      widget.display = widget.calculator.getInput(widget.display + input);
-    });
-  }
-
-  void _removeChar() {
+  void _deleteInput() {
     setState(() {
       if (widget.display.length != 0) {
         widget.display = widget.calculator
             .getInput(widget.display.substring(0, widget.display.length - 1));
+
+        String res = widget.calculator.getResult(widget.display);
+        if (res != '') widget.result = res;
       }
     });
   }

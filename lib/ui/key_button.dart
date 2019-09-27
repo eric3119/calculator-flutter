@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class NumberButton extends StatelessWidget {
+class KeyButton extends StatelessWidget {
   final keyBtn;
   final Function action;
   final Color bgColor;
@@ -8,7 +8,7 @@ class NumberButton extends StatelessWidget {
   final double hsize;
   final double vsize;
 
-  NumberButton(this.keyBtn, this.action, this.bgColor, this.hsize,
+  KeyButton(this.keyBtn, this.action, this.bgColor, this.hsize,
       {this.vsize = 4, this.textColor = Colors.white});
 
   @override
@@ -18,7 +18,6 @@ class NumberButton extends StatelessWidget {
       width: (MediaQuery.of(context).size.width - 10) / vsize,
       height: (MediaQuery.of(context).size.height - 310) / hsize,
       child: FlatButton(
-        // shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
         color: bgColor,
         child: buildButton(),
         onPressed: () {
@@ -26,7 +25,7 @@ class NumberButton extends StatelessWidget {
             if (keyBtn == '=')
               action();
             else
-              action(true, keyBtn);
+              action(keyBtn);
           } else {
             action();
           }

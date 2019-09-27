@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'number_button.dart';
+import 'key_button.dart';
 
 class Keypad extends StatelessWidget {
   final Function updateInput;
+  final Function deleteInput;
   final Function updateResult;
   final double numberKeysColumnSize = 4;
   final double operationKeysColumnSize = 5;
   final double keypadLineSize = 5;
 
-  Keypad(this.updateInput, this.updateResult);
+  Keypad(this.updateInput, this.updateResult, this.deleteInput);
 
   @override
   Widget build(BuildContext context) {
@@ -21,41 +22,41 @@ class Keypad extends StatelessWidget {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  NumberButton('7', updateInput, Colors.transparent,
+                  KeyButton('7', updateInput, Colors.transparent,
                       numberKeysColumnSize),
-                  NumberButton('8', updateInput, Colors.transparent,
+                  KeyButton('8', updateInput, Colors.transparent,
                       numberKeysColumnSize),
-                  NumberButton('9', updateInput, Colors.transparent,
-                      numberKeysColumnSize),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  NumberButton('4', updateInput, Colors.transparent,
-                      numberKeysColumnSize),
-                  NumberButton('5', updateInput, Colors.transparent,
-                      numberKeysColumnSize),
-                  NumberButton('6', updateInput, Colors.transparent,
+                  KeyButton('9', updateInput, Colors.transparent,
                       numberKeysColumnSize),
                 ],
               ),
               Row(
                 children: <Widget>[
-                  NumberButton('1', updateInput, Colors.transparent,
+                  KeyButton('4', updateInput, Colors.transparent,
                       numberKeysColumnSize),
-                  NumberButton('2', updateInput, Colors.transparent,
+                  KeyButton('5', updateInput, Colors.transparent,
                       numberKeysColumnSize),
-                  NumberButton('3', updateInput, Colors.transparent,
+                  KeyButton('6', updateInput, Colors.transparent,
                       numberKeysColumnSize),
                 ],
               ),
               Row(
                 children: <Widget>[
-                  NumberButton('0', updateInput, Colors.transparent,
+                  KeyButton('1', updateInput, Colors.transparent,
                       numberKeysColumnSize),
-                  NumberButton(',', updateInput, Colors.transparent,
+                  KeyButton('2', updateInput, Colors.transparent,
                       numberKeysColumnSize),
-                  NumberButton('=', updateResult, Colors.transparent,
+                  KeyButton('3', updateInput, Colors.transparent,
+                      numberKeysColumnSize),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  KeyButton('0', updateInput, Colors.transparent,
+                      numberKeysColumnSize),
+                  KeyButton('.', updateInput, Colors.transparent,
+                      numberKeysColumnSize),
+                  KeyButton('=', updateResult, Colors.transparent,
                       numberKeysColumnSize),
                 ],
               ),
@@ -64,37 +65,37 @@ class Keypad extends StatelessWidget {
           Column(),
           Column(
             children: <Widget>[
-              NumberButton(
+              KeyButton(
                   Icon(
                     Icons.backspace,
                     color: Colors.blue,
                     size: 35,
                   ),
-                  () => updateInput(false),
+                  deleteInput,
                   Colors.black,
                   operationKeysColumnSize),
-              NumberButton(
+              KeyButton(
                 '+',
                 updateInput,
                 Colors.transparent,
                 operationKeysColumnSize,
                 textColor: Colors.blue,
               ),
-              NumberButton(
+              KeyButton(
                 '-',
                 updateInput,
                 Colors.transparent,
                 operationKeysColumnSize,
                 textColor: Colors.blue,
               ),
-              NumberButton(
+              KeyButton(
                 'x',
                 updateInput,
                 Colors.transparent,
                 operationKeysColumnSize,
                 textColor: Colors.blue,
               ),
-              NumberButton(
+              KeyButton(
                 '/',
                 updateInput,
                 Colors.transparent,

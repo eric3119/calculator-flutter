@@ -1,7 +1,7 @@
 import 'category.dart';
 
 const List<String> RegExList = [
-  r'([0-9]+),([0-9]*)',
+  r'([0-9]+)\.([0-9]*)',
   r'([0-9]+)',
   r'\+',
   r'\-',

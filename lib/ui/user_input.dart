@@ -23,22 +23,25 @@ class _UserInputState extends State<UserInput> {
         children: <Widget>[
           Container(
             margin: EdgeInsets.all(10),
-            height: MediaQuery.of(context).size.height / 4,
+            height: (MediaQuery.of(context).size.height - 20) * 0.25,
             width: MediaQuery.of(context).size.width,
-            child: ListView(
+            child: Container(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-              children: <Widget>[
-                Text(
-                  widget.display,
-                  style: TextStyle(color: Colors.black, fontSize: 50),
-                  textAlign: TextAlign.right,
-                ),
-                Text(
-                  widget.result,
-                  style: TextStyle(color: Colors.black, fontSize: 50),
-                  textAlign: TextAlign.right,
-                ),
-              ],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    widget.display,
+                    style: TextStyle(color: Colors.black, fontSize: 50),
+                    textAlign: TextAlign.right,
+                  ),
+                  Text(
+                    widget.result,
+                    style: TextStyle(color: Colors.black, fontSize: 50),
+                    textAlign: TextAlign.right,
+                  ),
+                ],
+              ),
             ),
             decoration: BoxDecoration(
               color: Color.fromARGB(50, 121, 156, 110),
@@ -48,12 +51,10 @@ class _UserInputState extends State<UserInput> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height / 32,
+            height: (MediaQuery.of(context).size.height) * 0.05,
           ),
           Container(
-            // height: MediaQuery.of(context).size.height -
-            //     ((MediaQuery.of(context).size.height * 34 - 40) / 120),
-            height: (MediaQuery.of(context).size.height - 158) * 3 / 4,
+            height: (MediaQuery.of(context).size.height - 15) * 0.55,
             color: Colors.black,
             child: Keypad(_updateInput, _updateResult),
           ),

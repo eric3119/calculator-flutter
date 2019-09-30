@@ -66,10 +66,10 @@ class _UserInputState extends State<UserInput> {
             ),
           ),
           SizedBox(
-            height: (MediaQuery.of(context).size.height) * 0.06,
+            height: (MediaQuery.of(context).size.height - 20) * 0.06,
           ),
           Container(
-            height: (MediaQuery.of(context).size.height - 15) * 0.55,
+            height: (MediaQuery.of(context).size.height - 20) * 0.56,
             color: Colors.black,
             child: Keypad(_updateInput, _updateResult, _deleteInput),
           ),

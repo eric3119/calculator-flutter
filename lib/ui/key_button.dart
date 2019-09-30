@@ -6,30 +6,21 @@ class KeyButton extends StatelessWidget {
   final Color bgColor;
   final Color textColor;
   final double hsize;
-  final double vsize;
+  final double wsize;
 
   KeyButton(this.keyBtn, this.action, this.bgColor, this.hsize,
-      {this.vsize = 4, this.textColor = Colors.white});
+      {this.wsize = 4, this.textColor = Colors.white});
 
   @override
   Widget build(BuildContext context) {
     print(context);
     return Container(
-      width: (MediaQuery.of(context).size.width - 10) / vsize,
-      height: (MediaQuery.of(context).size.height - 310) / hsize,
+      width: (MediaQuery.of(context).size.width - 10) / wsize,
+      height: (MediaQuery.of(context).size.height - 10) * 0.52 / hsize,
       child: FlatButton(
         color: bgColor,
         child: buildButton(),
-        onPressed: () {
-          if (keyBtn.runtimeType == String) {
-            if (keyBtn == '=')
-              action();
-            else
-              action(keyBtn);
-          } else {
-            action();
-          }
-        },
+        onPressed: () => action(),
       ),
     );
   }

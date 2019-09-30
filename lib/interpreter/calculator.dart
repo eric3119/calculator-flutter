@@ -4,7 +4,7 @@ import 'package:calculator/interpreter/tokenizer.dart';
 class Calculator {
   Tokenizer tokenizer = new Tokenizer();
   Token tk;
-  String strErr;
+  String strErr = '';
 
   String getInput(String input) {
     if (input.length <= 0) {

@@ -28,7 +28,7 @@ class Calculator {
 
     if (strErr == '') {
       List<String> splitDecimal = res.toString().split(".");
-      if (int.parse(splitDecimal[1]) == 0) return splitDecimal[0];
+      if (splitDecimal.length == 2 && int.parse(splitDecimal[1]) == 0) return splitDecimal[0];
 
       return res.toString();
     } else

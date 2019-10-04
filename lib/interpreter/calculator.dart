@@ -8,10 +8,26 @@ class Calculator {
 
   String getInput(String input) {
     if (input.length <= 0) {
-      return '0';
-    } else if (input.length == 2) {
-      if (input[0] == '0' && input[1] != '.') {
-        return input.substring(1);
+      return '';
+    }
+
+    return replaceOperator(input);
+  }
+
+  String replaceOperator(String input) {
+    if (input.length == 1) {
+      tokenizer.setBuffer(input);
+      tk = tokenizer.nextToken();
+
+      if (tk.categ != Category.CteFloat && tk.categ != Category.CteInt)
+        return '';
+    } else if (input.length != 0) {
+      tokenizer.setBuffer(input.substring(input.length - 2));
+      tk = tokenizer.nextToken();
+      if (tk.categ != Category.CteFloat && tk.categ != Category.CteInt) {
+        tk = tokenizer.nextToken();
+        if (tk.categ != Category.CteFloat && tk.categ != Category.CteInt)
+          return input.substring(0, input.length - 2) + input[input.length - 1];
       }
     }
 
@@ -28,7 +44,8 @@ class Calculator {
 
     if (strErr == '') {
       List<String> splitDecimal = res.toString().split(".");
-      if (splitDecimal.length == 2 && int.parse(splitDecimal[1]) == 0) return splitDecimal[0];
+      if (splitDecimal.length == 2 && int.parse(splitDecimal[1]) == 0)
+        return splitDecimal[0];
 
       return res.toString();
     } else
@@ -56,7 +73,14 @@ class Calculator {
       return fTar(Tarvh * fFa());
     } else if (tk.categ == Category.OpDiv) {
       tk = tokenizer.nextToken();
-      return fTar(Tarvh / fFa());
+      double res = Tarvh / fFa();
+      if (res == double.infinity ||
+          res == double.nan ||
+          res == double.negativeInfinity) {
+        strErr = 'division error';
+        return 0;
+      }
+      return res;
     } else
       return Tarvh;
   }

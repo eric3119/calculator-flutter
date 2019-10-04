@@ -8,7 +8,7 @@ class UserInput extends StatefulWidget {
   String result;
   Calculator calculator = Calculator();
 
-  UserInput([this.display = '0', this.result = '']);
+  UserInput([this.display = '', this.result = '']);
 
   @override
   _UserInputState createState() => _UserInputState();
